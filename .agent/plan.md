@@ -32,6 +32,61 @@ A modern, tranquil journaling application designed to help users capture their t
 > [!NOTE]
 > The UI Design Image section is omitted as the image generation tool is currently unavailable.
 
-
 ## Implementation Steps
+**Total Duration:** 10h 58m 47s
+
+### Task_1_DataLayer: Setup Room database, Entry entity, and DAO for journaling data storage.
+- **Status:** COMPLETED
+- **Updates:** Implemented Room data layer for Aura:
+- **Acceptance Criteria:**
+  - Room database initialized
+  - Entry entity includes Title, Date, Content, Mood
+  - DAO supports CRUD operations
+  - Build pass
+- **Duration:** 1h 3m 45s
+
+### Task_2_NavigationAdaptiveUI: Implement Jetpack Navigation 3 and Compose Material Adaptive scaffold for a responsive UI.
+- **Status:** COMPLETED
+- **Updates:** Implemented Navigation 3 and Adaptive UI:
+- **Acceptance Criteria:**
+  - Navigation 3 routes defined
+  - Adaptive layout works on phone/tablet
+  - Material 3 theme applied
+  - Build pass
+- **Duration:** 2h 34m 11s
+
+### Task_3_TimelineScreen: Build the Home screen timeline showing entries sorted by date with a tranquil nature header.
+- **Status:** COMPLETED
+- **Updates:** Improved header text contrast using semi-transparent scrims on both Timeline and Composer screens. Verified accessibility and build.
+- **Acceptance Criteria:**
+  - Entries displayed chronologically
+  - Nature images in header
+  - Floating action button for new entries
+  - Build pass
+- **Duration:** 1h 2m 9s
+
+### Task_4_ComposerScreen: Develop the Journal Composer screen for creating new entries with Title, Date, Content, and Mood selection.
+- **Status:** COMPLETED
+- **Updates:** Fixed Composer state management (fields reset on entry) and resolved the date selection timezone issue. Verified build.
+- **Acceptance Criteria:**
+  - Form fields for Title, Date, Content
+  - Mood dropdown functional
+  - Data persists to Room
+  - Build pass
+- **Duration:** 1h 1m 38s
+
+### Task_5_RunVerify: Final verification of app stability, UI alignment, and requirement satisfaction.
+- **Status:** COMPLETED
+- **Updates:** Final verification successful:
+- Composer state resets correctly for new entries.
+- Date logic and timezone issues resolved.
+- Header text contrast improved with scrims.
+- App is stable and fully functional.
+- Material 3 and adaptive layout goals met.
+- **Acceptance Criteria:**
+  - App does not crash
+  - UI matches Aura project brief
+  - All features functional
+  - Final build pass
+- **Duration:** 5h 17m 4s
 
