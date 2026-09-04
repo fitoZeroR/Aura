@@ -13,9 +13,11 @@ import androidx.compose.material3.adaptive.navigation3.rememberListDetailSceneSt
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.dropUnlessResumed
+import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
+import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import com.example.aura.ui.navigation.Route
 import com.example.aura.ui.screens.ComposerScreen
@@ -44,13 +46,13 @@ fun AuraApp() {
 
     NavDisplay(
         backStack = backStack,
-        onBack = {
-            if (backStack.size > 1) {
-                backStack.removeAt(backStack.size - 1)
-            }
-        },
+        onBack = { backStack.removeLastOrNull() },
         modifier = Modifier.fillMaxSize(),
         sceneStrategy = listDetailStrategy,
+        entryDecorators = listOf(
+            rememberSaveableStateHolderNavEntryDecorator(),
+            rememberViewModelStoreNavEntryDecorator()
+        ),
         entryProvider = entryProvider {
             entry<Route.Timeline>(
                 metadata = ListDetailSceneStrategy.listPane()
@@ -66,9 +68,7 @@ fun AuraApp() {
             ) {
                 ComposerScreen(
                     onNavigateBack = {
-                        if (backStack.size > 1) {
-                            backStack.removeAt(backStack.size - 1)
-                        }
+                        backStack.removeLastOrNull()
                     }
                 )
             }
