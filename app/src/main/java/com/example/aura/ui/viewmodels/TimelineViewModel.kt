@@ -9,13 +9,13 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 
-class TimelineViewModel(private val repository: JournalRepository) : ViewModel() {
+class TimelineViewModel(repository: JournalRepository) : ViewModel() {
 
     val entries: StateFlow<List<JournalEntry>> = repository.allEntries
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
-            initialValue = emptyList()
+            initialValue = emptyList(),
         )
 
     class Factory(private val repository: JournalRepository) : ViewModelProvider.Factory {
