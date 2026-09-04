@@ -1,47 +1,47 @@
 ---
 name: commiter
-description: Use it when you're asked to create un commit
+description: Use it when you're asked to create a commit
 ---
 
 # Commiter Skill
 
-Este skill define cómo realizar commits siguiendo el estándar de **Conventional Commits** y el uso de **Gitmoji**.
+This skill defines how to perform commits following the **Conventional Commits** standard and the use of **Gitmoji**.
 
-## Estructura del Commit
+## Commit Structure
 
-Los mensajes de commit deben seguir la siguiente estructura:
+Commit messages must follow this structure:
 
 ```
-<emoji> <tipo>(<alcance>): <descripción corta>
+<emoji> <type>(<scope>): <short description>
 
-[cuerpo opcional]
+[optional body]
 
-[pie de página opcional]
+[optional footer]
 ```
 
-- **emoji**: El emoji correspondiente al tipo de cambio.
-- **tipo**: El tipo de cambio (feat, fix, etc.).
-- **alcance** (opcional): Una breve descripción del área afectada (ej: UI, DB, Auth).
-- **descripción**: Una explicación concisa en tiempo presente (ej: "añade botón de inicio").
+- **emoji**: The emoji corresponding to the type of change.
+- **type**: The type of change (feat, fix, etc.).
+- **scope** (optional): A brief description of the affected area (e.g., UI, DB, Auth).
+- **description**: A concise explanation in the present tense (e.g., "add start button").
 
-## Tipos de Commit y Emojis
+## Commit Types and Emojis
 
-| Emoji | Tipo | Descripción |
+| Emoji | Type | Description |
 | :--- | :--- | :--- |
-| ✨ | `feat` | Nueva funcionalidad |
-| 🐛 | `fix` | Corrección de errores |
-| 📝 | `docs` | Cambios en la documentación |
-| 🎨 | `style` | Cambios de formato, espacios, etc. (no afectan la lógica) |
-| ♻️ | `refactor` | Refactorización de código |
-| ⚡️ | `perf` | Mejoras de rendimiento |
-| ✅ | `test` | Añadir o modificar tests |
-| 🏗️ | `build` | Cambios en el sistema de construcción o dependencias |
-| 👷 | `ci` | Cambios en archivos y scripts de CI |
-| 🧹 | `chore` | Otros cambios que no modifican `src` ni `test` |
-| ⏪ | `revert` | Revertir un commit anterior |
+| ✨ | `feat` | New feature |
+| 🐛 | `fix` | Bug fix |
+| 📝 | `docs` | Documentation changes |
+| 🎨 | `style` | Formatting, missing semi-colons, etc.; no code change |
+| ♻️ | `refactor` | Refactoring production code |
+| ⚡️ | `perf` | Performance improvement |
+| ✅ | `test` | Adding or updating tests |
+| 🏗️ | `build` | Build system or external dependencies changes |
+| 👷 | `ci` | CI configuration files and scripts changes |
+| 🧹 | `chore` | Other changes that don't modify `src` or `test` files |
+| ⏪ | `revert` | Reverts a previous commit |
 
-## Reglas Críticas
+## Critical Rules
 
-1. **Compilación Previa**: Antes de cada commit, es obligatorio compilar el código (`gradle_build`) para asegurar que los cambios no rompen el proyecto.
-2. **Sin Push Automático**: No realices `git push` a menos que se te indique explícitamente.
-3. **Idioma**: Los mensajes de commit deben estar en español, a menos que el proyecto use inglés por defecto.
+1. **Pre-commit Compilation**: Before every commit, you must compile the code (`gradle_build`) to ensure that changes do not break the project.
+2. **No Automatic Push**: Do not perform `git push` unless explicitly instructed.
+3. **Language**: Commit messages should be in English by default, unless otherwise specified by the project guidelines.
