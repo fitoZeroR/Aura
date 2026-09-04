@@ -1,26 +1,22 @@
 package com.example.aura.ui.screens
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
-import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.DateRange
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import coil.compose.AsyncImage
 import com.example.aura.AuraApplication
 import com.example.aura.ui.theme.AuraTheme
 import com.example.aura.ui.viewmodels.ComposerViewModel
@@ -34,11 +30,16 @@ import java.util.*
 fun ComposerScreen(
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: ComposerViewModel = viewModel(
-        factory = ComposerViewModel.Factory(
-            (LocalContext.current.applicationContext as AuraApplication).repository
+    viewModel: ComposerViewModel = if (LocalInspectionMode.current) {
+        // Dummy for preview
+        viewModel()
+    } else {
+        viewModel(
+            factory = ComposerViewModel.Factory(
+                (LocalContext.current.applicationContext as AuraApplication).repository
+            )
         )
-    )
+    }
 ) {
     var showDatePicker by remember { mutableStateOf(false) }
     val scrollState = rememberScrollState()
@@ -73,63 +74,38 @@ fun ComposerScreen(
 
     Scaffold(
         topBar = {
-            Box(modifier = Modifier.fillMaxWidth()) {
-                AsyncImage(
-                    model = "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2560&auto=format&fit=crop",
-                    contentDescription = null,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(180.dp),
-                    contentScale = ContentScale.Crop
-                )
-                // Scrim for better text contrast
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(180.dp)
-                        .background(
-                            Brush.verticalGradient(
-                                colors = listOf(
-                                    Color.Black.copy(alpha = 0.5f),
-                                    Color.Transparent
-                                )
-                            )
-                        )
-                )
-                CenterAlignedTopAppBar(
-                    title = {
-                        Text(
-                            "New Entry",
-                            fontWeight = FontWeight.Bold,
-                            color = Color.White
-                        )
-                    },
-                    navigationIcon = {
-                        IconButton(onClick = onNavigateBack) {
-                            Icon(
-                                imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-                                contentDescription = "Back",
-                                tint = Color.White
-                            )
-                        }
-                    },
-                    actions = {
-                        IconButton(
-                            onClick = { viewModel.saveEntry(onNavigateBack) },
-                            enabled = viewModel.isInputValid
-                        ) {
-                            Icon(
-                                imageVector = Icons.Rounded.Check,
-                                contentDescription = "Save",
-                                tint = if (viewModel.isInputValid) Color.White else Color.White.copy(alpha = 0.5f)
-                            )
-                        }
-                    },
-                    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                        containerColor = Color.Transparent
+            CenterAlignedTopAppBar(
+                title = {
+                    Text(
+                        "New Entry",
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold
                     )
+                },
+                navigationIcon = {
+                    IconButton(onClick = onNavigateBack) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
+                            contentDescription = "Back"
+                        )
+                    }
+                },
+                actions = {
+                    TextButton(
+                        onClick = { viewModel.saveEntry(onNavigateBack) },
+                        enabled = viewModel.isInputValid
+                    ) {
+                        Text(
+                            "Save",
+                            fontWeight = FontWeight.Bold,
+                            color = if (viewModel.isInputValid) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
+                        )
+                    }
+                },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.background
                 )
-            }
+            )
         },
         modifier = modifier.fillMaxSize()
     ) { innerPadding ->
@@ -139,39 +115,45 @@ fun ComposerScreen(
                 .fillMaxSize()
                 .verticalScroll(scrollState)
                 .padding(24.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
-            OutlinedTextField(
+            TextField(
                 value = viewModel.title,
                 onValueChange = { viewModel.title = it },
-                label = { Text("Title") },
+                placeholder = { 
+                    Text(
+                        "Entry Title", 
+                        style = MaterialTheme.typography.headlineMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
+                    ) 
+                },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
-                shape = MaterialTheme.shapes.large
+                textStyle = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
+                colors = TextFieldDefaults.colors(
+                    focusedContainerColor = Color.Transparent,
+                    unfocusedContainerColor = Color.Transparent,
+                    disabledContainerColor = Color.Transparent,
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent,
+                )
             )
 
-            Box(
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable { showDatePicker = true }
+                    .clickable { showDatePicker = true },
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                OutlinedTextField(
-                    value = formatDateShort(viewModel.date),
-                    onValueChange = { },
-                    label = { Text("Date") },
-                    modifier = Modifier.fillMaxWidth(),
-                    readOnly = true,
-                    enabled = false,
-                    trailingIcon = {
-                        Icon(Icons.Rounded.DateRange, contentDescription = "Select Date")
-                    },
-                    shape = MaterialTheme.shapes.large,
-                    colors = OutlinedTextFieldDefaults.colors(
-                        disabledTextColor = MaterialTheme.colorScheme.onSurface,
-                        disabledBorderColor = MaterialTheme.colorScheme.outline,
-                        disabledLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                        disabledTrailingIconColor = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
+                Icon(
+                    Icons.Rounded.DateRange, 
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
+                )
+                Text(
+                    text = formatDateShort(viewModel.date),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurface
                 )
             }
 
@@ -183,11 +165,15 @@ fun ComposerScreen(
             OutlinedTextField(
                 value = viewModel.content,
                 onValueChange = { viewModel.content = it },
-                label = { Text("Capture your thoughts...") },
+                placeholder = { Text("What's on your mind?") },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .heightIn(min = 200.dp),
-                shape = MaterialTheme.shapes.large
+                    .heightIn(min = 300.dp),
+                shape = MaterialTheme.shapes.extraLarge,
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f),
+                    unfocusedBorderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.2f)
+                )
             )
 
             Spacer(modifier = Modifier.height(32.dp))
@@ -195,43 +181,41 @@ fun ComposerScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun MoodSelector(
     selectedMood: String,
     onMoodSelected: (String) -> Unit
 ) {
     val moods = listOf("Happy", "Calm", "Reflective", "Grateful", "Anxious", "Sad")
-    var expanded by remember { mutableStateOf(false) }
-
-    ExposedDropdownMenuBox(
-        expanded = expanded,
-        onExpandedChange = { expanded = !expanded },
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        OutlinedTextField(
-            value = selectedMood,
-            onValueChange = {},
-            readOnly = true,
-            label = { Text("Mood") },
-            trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
-            modifier = Modifier
-                .menuAnchor(MenuAnchorType.PrimaryEditable, true)
-                .fillMaxWidth(),
-            shape = MaterialTheme.shapes.large
+    
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text(
+            "How are you feeling?",
+            style = MaterialTheme.typography.labelLarge,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
         )
-        ExposedDropdownMenu(
-            expanded = expanded,
-            onDismissRequest = { expanded = false }
+        FlowRow(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             moods.forEach { mood ->
-                DropdownMenuItem(
-                    text = { Text(mood) },
-                    onClick = {
-                        onMoodSelected(mood)
-                        expanded = false
-                    },
-                    contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
+                val isSelected = selectedMood == mood
+                FilterChip(
+                    selected = isSelected,
+                    onClick = { onMoodSelected(mood) },
+                    label = { Text(mood) },
+                    colors = FilterChipDefaults.filterChipColors(
+                        selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                        selectedLabelColor = MaterialTheme.colorScheme.onPrimaryContainer
+                    ),
+                    border = FilterChipDefaults.filterChipBorder(
+                        enabled = true,
+                        selected = isSelected,
+                        borderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.2f),
+                        selectedBorderColor = Color.Transparent
+                    )
                 )
             }
         }
@@ -239,16 +223,47 @@ fun MoodSelector(
 }
 
 fun formatDateShort(timestamp: Long): String {
-    val formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy", Locale.getDefault())
+    val formatter = DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy", Locale.getDefault())
     return Instant.ofEpochMilli(timestamp)
         .atZone(ZoneOffset.UTC)
         .format(formatter)
 }
 
-@Preview(showBackground = true, device = "spec:width=411dp,height=891dp")
+@Preview(showBackground = true)
+@Composable
+fun MoodSelectorPreview() {
+    AuraTheme {
+        Box(modifier = Modifier.padding(24.dp)) {
+            MoodSelector(selectedMood = "Happy", onMoodSelected = {})
+        }
+    }
+}
+
+@Preview(showBackground = true)
 @Composable
 fun ComposerScreenPreview() {
     AuraTheme {
-        ComposerScreen(onNavigateBack = {})
+        // We can't easily preview the whole screen because of the ViewModel
+        // but we can preview the layout structure with dummy data
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(24.dp),
+            verticalArrangement = Arrangement.spacedBy(24.dp)
+        ) {
+            Text(
+                "New Entry",
+                style = MaterialTheme.typography.headlineMedium,
+                fontWeight = FontWeight.Bold
+            )
+            MoodSelector(selectedMood = "Calm", onMoodSelected = {})
+            OutlinedTextField(
+                value = "",
+                onValueChange = {},
+                placeholder = { Text("What's on your mind?") },
+                modifier = Modifier.fillMaxWidth().height(200.dp),
+                shape = MaterialTheme.shapes.extraLarge
+            )
+        }
     }
 }
