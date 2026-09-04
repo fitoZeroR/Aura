@@ -14,7 +14,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
@@ -47,7 +46,7 @@ fun TimelineScreen(
     } else {
         viewModel(
             factory = TimelineViewModel.Factory(
-                (LocalContext.current.applicationContext as AuraApplication).repository
+                (LocalContext.current.applicationContext as AuraApplication).repository,
             )
         )
     }
@@ -101,7 +100,7 @@ fun TimelineScreen(
             ) {
                 item { Spacer(modifier = Modifier.height(8.dp)) }
                 itemsIndexed(entries) { index, entry ->
-                    var visible by remember { mutableStateOf(false) }
+                    var visible by remember { mutableStateOf(value = false) }
                     LaunchedEffect(Unit) {
                         visible = true
                     }
