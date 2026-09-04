@@ -36,12 +36,12 @@ fun ComposerScreen(
     } else {
         viewModel(
             factory = ComposerViewModel.Factory(
-                (LocalContext.current.applicationContext as AuraApplication).repository
+                (LocalContext.current.applicationContext as AuraApplication).repository,
             )
         )
     }
 ) {
-    var showDatePicker by remember { mutableStateOf(false) }
+    var showDatePicker by remember { mutableStateOf(value = false) }
     val scrollState = rememberScrollState()
 
     LaunchedEffect(Unit) {
@@ -66,7 +66,7 @@ fun ComposerScreen(
                 TextButton(onClick = { showDatePicker = false }) {
                     Text("Cancel")
                 }
-            }
+            },
         ) {
             DatePicker(state = datePickerState)
         }
@@ -159,7 +159,7 @@ fun ComposerScreen(
 
             MoodSelector(
                 selectedMood = viewModel.mood,
-                onMoodSelected = { viewModel.mood = it }
+                onMoodSelected = { viewModel.mood = it },
             )
 
             OutlinedTextField(
