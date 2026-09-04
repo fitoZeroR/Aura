@@ -1,6 +1,7 @@
 package com.example.aura.ui.viewmodels
 
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
@@ -14,7 +15,7 @@ import java.time.Instant
 class ComposerViewModel(private val repository: JournalRepository) : ViewModel() {
 
     var title by mutableStateOf("")
-    var date by mutableStateOf(Instant.now().toEpochMilli())
+    var date by mutableLongStateOf(Instant.now().toEpochMilli())
     var content by mutableStateOf("")
     var mood by mutableStateOf("Calm")
 
@@ -35,7 +36,7 @@ class ComposerViewModel(private val repository: JournalRepository) : ViewModel()
                     title = title,
                     date = date,
                     content = content,
-                    mood = mood
+                    mood = mood,
                 )
                 repository.insert(entry)
                 resetFields()
