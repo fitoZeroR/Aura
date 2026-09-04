@@ -76,7 +76,7 @@ fun TimelineScreen(
                 LargeTopAppBar(
                     title = {
                         Text(
-                            "Aura Timeline",
+                            "Aura rodofo",
                             fontWeight = FontWeight.Bold,
                             style = MaterialTheme.typography.headlineLarge
                         )
