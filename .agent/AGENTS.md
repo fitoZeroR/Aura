@@ -1,1 +1,2 @@
-Cada vez que crees un codigo, crea tambien un commit. Pero mo hagas push si no te lo digo
+Cada vez que crees un codigo, crea tambien un commit. Pero no hagas push si no te lo digo.
+Antes de hacer cada commit, compila el código para asegurarte de que todo funcione correctamente después de desarrollar una nueva funcionalidad o cambio.
