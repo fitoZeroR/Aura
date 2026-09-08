@@ -2,53 +2,54 @@ package com.example.aura.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Aura Light Palette
-val AuraPrimaryLight = Color(0xFF00695C) // Deep Teal
+// Aura Light Palette - Terracotta/Orange Warmth
+val AuraPrimaryLight = Color(0xFFFF7043) // Terracotta Orange
 val AuraOnPrimaryLight = Color(0xFFFFFFFF)
-val AuraPrimaryContainerLight = Color(0xFFB2DFDB)
-val AuraOnPrimaryContainerLight = Color(0xFF00201A)
+val AuraPrimaryContainerLight = Color(0xFFFFDBCA) // Very soft orange
+val AuraOnPrimaryContainerLight = Color(0xFF331100)
 
-val AuraSecondaryLight = Color(0xFF4E635D) // Sage Greenish
+val AuraSecondaryLight = Color(0xFF77574E) // Warm Brown
 val AuraOnSecondaryLight = Color(0xFFFFFFFF)
-val AuraSecondaryContainerLight = Color(0xFFD1E8E0)
-val AuraOnSecondaryContainerLight = Color(0xFF0C201B)
+val AuraSecondaryContainerLight = Color(0xFFFFDBD1)
+val AuraOnSecondaryContainerLight = Color(0xFF2C150F)
 
-val AuraTertiaryLight = Color(0xFF416276) // Muted Blue
+val AuraTertiaryLight = Color(0xFF6C5D2F) // Muted Gold/Olive
 val AuraOnTertiaryLight = Color(0xFFFFFFFF)
-val AuraTertiaryContainerLight = Color(0xFFC5E7FF)
-val AuraOnTertiaryContainerLight = Color(0xFF001E2D)
+val AuraTertiaryContainerLight = Color(0xFFF6E1A6)
+val AuraOnTertiaryContainerLight = Color(0xFF231B00)
 
 val AuraErrorLight = Color(0xFFBA1A1A)
 val AuraOnErrorLight = Color(0xFFFFFFFF)
 
-val AuraBackgroundLight = Color(0xFFFBFDFA) // Very light mint/white
-val AuraOnBackgroundLight = Color(0xFF191C1B)
-val AuraSurfaceLight = Color(0xFFFBFDFA)
-val AuraOnSurfaceLight = Color(0xFF191C1B)
-val AuraSurfaceVariantLight = Color(0xFFDBE5E0)
-val AuraOnSurfaceVariantLight = Color(0xFF3F4945)
-val AuraOutlineLight = Color(0xFF6F7975)
+val AuraBackgroundLight = Color(0xFFFFF8F6) // Warm Paper White
+val AuraOnBackgroundLight = Color(0xFF231917)
+val AuraSurfaceLight = Color(0xFFFFF8F6)
+val AuraOnSurfaceLight = Color(0xFF231917)
+val AuraSurfaceVariantLight = Color(0xFFF5DED8)
+val AuraOnSurfaceVariantLight = Color(0xFF53433F)
+val AuraOutlineLight = Color(0xFF85736E)
 
-// Aura Dark Palette
-val AuraPrimaryDark = Color(0xFF80D4C7)
-val AuraOnPrimaryDark = Color(0xFF003730)
-val AuraPrimaryContainerDark = Color(0xFF005045)
-val AuraOnPrimaryContainerDark = Color(0xFF9CF1E3)
+// Aura Dark Palette - Burnt Ochre/Warm Embers
+val AuraPrimaryDark = Color(0xFFFFB5A0) // Soft Peach
+val AuraOnPrimaryDark = Color(0xFF5E1700)
+val AuraPrimaryContainerDark = Color(0xFF862200)
+val AuraOnPrimaryContainerDark = Color(0xFFFFDBCA)
 
-val AuraSecondaryDark = Color(0xFFB5CCC4)
-val AuraOnSecondaryDark = Color(0xFF20352F)
-val AuraSecondaryContainerDark = Color(0xFF374B45)
-val AuraOnSecondaryContainerDark = Color(0xFFD1E8E0)
+val AuraSecondaryDark = Color(0xFFE7BDB2)
+val AuraOnSecondaryDark = Color(0xFF442A22)
+val AuraSecondaryContainerDark = Color(0xFF5D4037)
+val AuraOnSecondaryContainerDark = Color(0xFFFFDBD1)
 
-val AuraTertiaryDark = Color(0xFFA9CBE2)
-val AuraOnTertiaryDark = Color(0xFF0E3446)
-val AuraTertiaryContainerDark = Color(0xFF294A5E)
-val AuraOnTertiaryContainerDark = Color(0xFFC5E7FF)
+val AuraTertiaryDark = Color(0xFFD9C58C)
+val AuraOnTertiaryDark = Color(0xFF3B2F05)
+val AuraTertiaryContainerDark = Color(0xFF53451A)
+val AuraOnTertiaryContainerDark = Color(0xFFF6E1A6)
 
-val AuraBackgroundDark = Color(0xFF191C1B)
-val AuraOnBackgroundDark = Color(0xFFE0E3E1)
-val AuraSurfaceDark = Color(0xFF191C1B)
-val AuraOnSurfaceDark = Color(0xFFE0E3E1)
-val AuraSurfaceVariantDark = Color(0xFF3F4945)
-val AuraOnSurfaceVariantDark = Color(0xFFBFC9C4)
-val AuraOutlineDark = Color(0xFF89938F)
+val AuraBackgroundDark = Color(0xFF231917) // Dark Brown/Charcoal
+val AuraOnBackgroundDark = Color(0xFFEDE0DD)
+val AuraSurfaceDark = Color(0xFF231917)
+val AuraOnSurfaceDark = Color(0xFFEDE0DD)
+val AuraSurfaceVariantDark = Color(0xFF53433F)
+val AuraOnSurfaceVariantDark = Color(0xFFD8C2BC)
+val AuraOutlineDark = Color(0xFFA08D87)
+

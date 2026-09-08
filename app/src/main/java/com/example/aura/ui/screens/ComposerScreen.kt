@@ -37,9 +37,9 @@ fun ComposerScreen(
         viewModel(
             factory = ComposerViewModel.Factory(
                 (LocalContext.current.applicationContext as AuraApplication).repository,
-            )
+            ),
         )
-    }
+    },
 ) {
     var showDatePicker by remember { mutableStateOf(value = false) }
     val scrollState = rememberScrollState()
@@ -50,15 +50,17 @@ fun ComposerScreen(
 
     if (showDatePicker) {
         val datePickerState = rememberDatePickerState(
-            initialSelectedDateMillis = viewModel.date
+            initialSelectedDateMillis = viewModel.date,
         )
         DatePickerDialog(
             onDismissRequest = { showDatePicker = false },
             confirmButton = {
-                TextButton(onClick = {
-                    viewModel.date = datePickerState.selectedDateMillis ?: viewModel.date
-                    showDatePicker = false
-                }) {
+                TextButton(
+                    onClick = {
+                        viewModel.date = datePickerState.selectedDateMillis ?: viewModel.date
+                        showDatePicker = false
+                    }
+                ) {
                     Text("OK")
                 }
             },
@@ -102,7 +104,7 @@ fun ComposerScreen(
                         )
                     }
                 },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.background
                 )
             )
@@ -158,9 +160,8 @@ fun ComposerScreen(
             }
 
             MoodSelector(
-                selectedMood = viewModel.mood,
-                onMoodSelected = { viewModel.mood = it },
-            )
+                selectedMood = viewModel.mood
+            ) { viewModel.mood = it }
 
             OutlinedTextField(
                 value = viewModel.content,
@@ -185,20 +186,22 @@ fun ComposerScreen(
 @Composable
 fun MoodSelector(
     selectedMood: String,
-    onMoodSelected: (String) -> Unit
+    onMoodSelected: (String) -> Unit,
 ) {
     val moods = listOf("Happy", "Calm", "Reflective", "Grateful", "Anxious", "Sad")
     
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
         Text(
             "How are you feeling?",
             style = MaterialTheme.typography.labelLarge,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
         FlowRow(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             moods.forEach { mood ->
                 val isSelected = selectedMood == mood
@@ -234,7 +237,7 @@ fun formatDateShort(timestamp: Long): String {
 fun MoodSelectorPreview() {
     AuraTheme {
         Box(modifier = Modifier.padding(24.dp)) {
-            MoodSelector(selectedMood = "Happy", onMoodSelected = {})
+            MoodSelector(selectedMood = "Happy") {}
         }
     }
 }
@@ -256,7 +259,7 @@ fun ComposerScreenPreview() {
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Bold
             )
-            MoodSelector(selectedMood = "Calm", onMoodSelected = {})
+            MoodSelector(selectedMood = "Calm") {}
             OutlinedTextField(
                 value = "",
                 onValueChange = {},

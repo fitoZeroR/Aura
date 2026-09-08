@@ -51,25 +51,25 @@ fun AuraApp() {
         sceneStrategies = listOf(listDetailStrategy),
         entryDecorators = listOf(
             rememberSaveableStateHolderNavEntryDecorator(),
-            rememberViewModelStoreNavEntryDecorator()
+            rememberViewModelStoreNavEntryDecorator(),
         ),
         entryProvider = entryProvider {
             entry<Route.Timeline>(
-                metadata = ListDetailSceneStrategy.listPane()
+                metadata = ListDetailSceneStrategy.listPane(),
             ) {
                 TimelineScreen(
                     onNavigateToComposer = dropUnlessResumed {
                         backStack.add(Route.Composer)
-                    }
+                    },
                 )
             }
             entry<Route.Composer>(
-                metadata = ListDetailSceneStrategy.detailPane()
+                metadata = ListDetailSceneStrategy.detailPane(),
             ) {
                 ComposerScreen(
                     onNavigateBack = {
                         backStack.removeLastOrNull()
-                    }
+                    },
                 )
             }
         }

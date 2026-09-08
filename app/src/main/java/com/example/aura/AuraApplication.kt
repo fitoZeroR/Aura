@@ -10,7 +10,7 @@ class AuraApplication : Application() {
         Room.databaseBuilder(
             this,
             AuraDatabase::class.java,
-            "aura_database"
+            "aura_database",
         ).build()
     }
 

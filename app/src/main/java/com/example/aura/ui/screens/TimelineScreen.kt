@@ -47,9 +47,9 @@ fun TimelineScreen(
         viewModel(
             factory = TimelineViewModel.Factory(
                 (LocalContext.current.applicationContext as AuraApplication).repository,
-            )
+            ),
         )
-    }
+    },
 ) {
     val entries by viewModel.entries.collectAsStateWithLifecycle()
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
@@ -61,14 +61,14 @@ fun TimelineScreen(
                     Text(
                         "Aura",
                         style = MaterialTheme.typography.headlineLarge,
-                        color = MaterialTheme.colorScheme.primary
+                        color = MaterialTheme.colorScheme.primary,
                     )
                 },
-                colors = TopAppBarDefaults.largeTopAppBarColors(
+                colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.background,
                     scrolledContainerColor = MaterialTheme.colorScheme.surface,
                 ),
-                scrollBehavior = scrollBehavior
+                scrollBehavior = scrollBehavior,
             )
         },
         floatingActionButton = {
@@ -76,11 +76,11 @@ fun TimelineScreen(
                 onClick = onNavigateToComposer,
                 containerColor = MaterialTheme.colorScheme.primary,
                 contentColor = MaterialTheme.colorScheme.onPrimary,
-                shape = MaterialTheme.shapes.extraLarge
+                shape = MaterialTheme.shapes.extraLarge,
             ) {
                 Icon(
                     imageVector = Icons.Rounded.Add,
-                    contentDescription = "Add Entry"
+                    contentDescription = "Add Entry",
                 )
             }
         },
