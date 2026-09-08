@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<journey name="Crear una nueva entrada">
+    <description xml:space="preserve">Cuando la aplicación se abra, se deberá pulsar el botón más para crear una nueva entrada y luego verificar que la entrada se ha creado correctamente en la pantalla principal.</description>
+    <actions xml:space="preserve">
+        <action>Haz clic en el FAB con el icono "+" y espera a que el detalle este abierto</action><action>Pon "Prueba UI" en title</action><action>Pon "Esto es una prueba" en el content</action><action>Elije el mood Anxious</action><action>Guarda y espera a que se cargue el dashboard principal</action><action>Comprueba que aparece la nueva entrada en el dashboard principal</action>
+    </actions>
+</journey>
