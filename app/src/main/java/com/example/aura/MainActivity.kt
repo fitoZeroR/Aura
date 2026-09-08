@@ -48,7 +48,7 @@ fun AuraApp() {
         backStack = backStack,
         onBack = { backStack.removeLastOrNull() },
         modifier = Modifier.fillMaxSize(),
-        sceneStrategy = listDetailStrategy,
+        sceneStrategies = listOf(listDetailStrategy),
         entryDecorators = listOf(
             rememberSaveableStateHolderNavEntryDecorator(),
             rememberViewModelStoreNavEntryDecorator()
